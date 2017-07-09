@@ -259,12 +259,28 @@ $(document).ready(function() {
 	var terrainGeometry = new THREE.PlaneGeometry(SIZE_X, SIZE_X, SIZE_X * QUALITY, SIZE_X * QUALITY)
 	terrain = buildTerrain(terrainGeometry)
 
+	// lock frame rate
+	var desiredFPS = 1000 / 144
+    var startTime = Date.now()
+	function update() {
+		var curTime = Date.now()
+		if (curTime - startTime > desiredFPS) {
+			requestAnimationFrame(render)
+			
+			startTime = curTime
+		}
+		
+		requestAnimationFrame(update)
+	}
+	
+	update()
+	
 	// render loop
 	var frame = 0
 	var count = 0
 	var rowPos = []
 	var verts = []
-    function render() {
+    function render() {	
 		frame += 1
 		
 		for (var i = 0; i < clouds.length; i++) {
@@ -301,7 +317,7 @@ $(document).ready(function() {
 			count += 1
 			
 			var curVerts = []
-			var newHeight = avgEnergy / 24
+			var newHeight = avgEnergy / 20
 			if (newHeight > 8 - VARIANCE / 3) {
 				newHeight = 8 - VARIANCE / 3
 			}
@@ -413,8 +429,6 @@ $(document).ready(function() {
 		}
 		
         renderer.render(scene, camera)
-		
-		requestAnimationFrame(render)
     }
 
     render()
