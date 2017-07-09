@@ -26,6 +26,7 @@ p {
 .bar {
 	position: absolute;
 	width: 100%;
+	min-width: 480px;
 	
 	padding-bottom: 8px;
 	

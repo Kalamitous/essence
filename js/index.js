@@ -2,6 +2,10 @@ $(document).ready(function() {
 	$(".bar").css('top', window.innerHeight / 2 - $(".bar").height() / 2)
 	$(".upload").hide()
 	
+	$(window).on('resize', function() {
+		$(".bar").css('top', window.innerHeight / 2 - $(".bar").height() / 2)
+	})
+	
 	$("#barUpload").on('click', function(event) {
         $("input").trigger('click');
     });

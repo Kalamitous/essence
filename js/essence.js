@@ -58,15 +58,21 @@ $(document).ready(function() {
 	// setup scene
     var scene = new THREE.Scene()
     scene.background = new THREE.Color(0x81dfff)
-
-    var camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000)
 	
+    var camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000)
 	camera.position.y = -32
 	camera.position.z = CAM_HEIGHT
 	camera.rotation.x = Math.PI / 2.5
 
     var renderer = new THREE.WebGLRenderer({canvas: document.getElementById("essence")})
     renderer.setSize(window.innerWidth, window.innerHeight)
+	
+	$(window).on('resize', function() {
+		camera.aspect = window.innerWidth / window.innerHeight
+		camera.updateProjectionMatrix()
+
+		renderer.setSize(window.innerWidth, window.innerHeight)
+	})
 
 	var loader = new THREE.TextureLoader()
 	loader.crossOrigin = ''
