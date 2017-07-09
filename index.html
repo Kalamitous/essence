@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Essence</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.js"></script>
+		<script src="https://use.fontawesome.com/25967a532f.js"></script>
+
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Quicksand" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		
+		<script src="js/libs/perlin.js"></script>
+		
+		<script src="js/shaders/TerrainMaterial.js"></script>
+		<script src="js/shaders/WaterShader.js"></script>
+		
+		<script src="js/index.js"></script>
+		<script src="js/essence.js"></script>
+    </head>
+
+	<body>
+		<div class="bar">
+			<h1>essence</h1>
+			<p>an audio-reactive experience</p>
+
+			<ul>
+				<li>
+					<div>
+						<i class="fa fa-upload" id="barUpload" aria-hidden="true"></i>
+						<p>upload song</p>
+					</div>
+				</li>
+				
+				<li>
+					<div class="line"></div>
+				</li>
+				
+				<li>
+					<div>
+						<i class="fa fa-play" id="barPlay" aria-hidden="true"></i>
+						<p>play sample</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="upload">
+			<label>
+				<i class="fa fa-upload" aria-hidden="true"></i>
+				<input type="file" id="fileSelect"/>
+			</label>
+		</div>
+
+		<canvas id="essence"></canvas>
+	</body>
+</html>

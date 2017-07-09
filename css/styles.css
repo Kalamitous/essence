@@ -1,0 +1,117 @@
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+input {
+    display: none;
+}
+
+h1 {
+	color: #ffffff;
+	text-shadow: 0px 0px 8px #000000;
+	
+	font-size: 108px;
+	line-height: 96px;
+}
+
+p {
+	padding-bottom: 16px;
+	
+	font-family: Open Sans;
+	font-size: 24px;
+}
+
+.bar {
+	position: absolute;
+	width: 100%;
+	
+	padding-bottom: 8px;
+	
+	background-color: rgba(0, 0, 0, 0.3);
+	color: white;
+	
+	font-family: Quicksand;
+	text-align: center;
+	
+	z-index: 1;
+}
+
+.line{
+	width: 2px;
+	height: 108px;
+	
+	background: #ffffff;
+}
+
+ul {
+	display: table;
+	margin: 0 auto;
+	list-style: none;
+}
+
+li {
+	float: left;
+	display: inline;
+	font-size: 48px;
+}
+
+li:first-child {
+	padding-right: 32px;
+}
+
+li:last-child {
+	padding-left: 32px;
+}
+
+.upload {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	
+	width: 60px;
+	height: 60px;
+	
+	border: 4px solid #ffffff;
+	border-radius: 34px;
+	
+	background-color: #35ccff;
+	color: white;
+	opacity: 0;
+	
+	font-size: 32px;
+	
+	transition: opacity 0.25s;
+	z-index: 1;
+}
+
+#barUpload {
+	color: #ffffff;
+	transition: color 0.25s;
+}
+
+#barUpload:hover {
+	color: #cef2ff;
+}
+
+#barPlay {
+	color: #ffffff;
+	transition: color 0.25s;
+}
+
+#barPlay:hover {
+	color: #ceffdb;
+}
+
+i {
+	position: relative;
+	padding: 12px 15px 12px 15px;
+	
+	cursor: pointer;
+}
+
+canvas {
+	position: absolute;
+	z-index: 0;
+}
