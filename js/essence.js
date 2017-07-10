@@ -259,22 +259,6 @@ $(document).ready(function() {
 	var terrainGeometry = new THREE.PlaneGeometry(SIZE_X, SIZE_X, SIZE_X * QUALITY, SIZE_X * QUALITY)
 	terrain = buildTerrain(terrainGeometry)
 
-	// lock frame rate
-	var desiredFPS = 1000 / 144
-    var startTime = Date.now()
-	function update() {
-		var curTime = Date.now()
-		if (curTime - startTime > desiredFPS) {
-			requestAnimationFrame(render)
-			
-			startTime = curTime
-		}
-		
-		requestAnimationFrame(update)
-	}
-	
-	update()
-	
 	// render loop
 	var frame = 0
 	var count = 0
@@ -432,6 +416,9 @@ $(document).ready(function() {
     }
 
     render()
+	setInterval(function() {
+        render()
+    }, 1000 / 144);
 })
 
 // helper functions
