@@ -1,9 +1,11 @@
 $(document).ready(function() {
-	$(".bar").css('top', window.innerHeight / 2 - $(".bar").height() / 2)
+	$(".bar").hide()
 	$(".upload").hide()
 	
+	$(".bar").css('top', window.innerHeight / 2.075 - $(".bar").height() / 2)
+	
 	$(window).on('resize', function() {
-		$(".bar").css('top', window.innerHeight / 2 - $(".bar").height() / 2)
+		$(".bar").css('top', window.innerHeight / 2.05 - $(".bar").height() / 2)
 	})
 	
 	$("#barUpload").on('click', function(event) {

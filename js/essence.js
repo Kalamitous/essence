@@ -77,6 +77,14 @@ $(document).ready(function() {
 	var loader = new THREE.TextureLoader()
 	loader.crossOrigin = ''
 	
+	THREE.DefaultLoadingManager.onProgress = function (item, loaded, total) {
+		if (loaded == total) {
+			$(".blank").fadeOut(800, 'linear', function() {
+				$(".bar").fadeIn(800)
+			})
+		}
+	};
+
 	var ambientLight = new THREE.AmbientLight(0x404040, 2)
 	var hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 0.5)
 	var directionalLight = new THREE.DirectionalLight(0xffff55, 0.5)
