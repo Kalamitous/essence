@@ -9,7 +9,7 @@ var CLOUD_NUM = 32
 var OCEAN_SIZE = SIZE_X * 4
 var VARIANCE = 4
 var CAM_HEIGHT = 16
-var SPEED = 0.05
+var SPEED = 0.1
 
 // helper functions
 function genNoise(type, nx, ny) {

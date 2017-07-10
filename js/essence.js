@@ -1,3 +1,39 @@
+window.requestAnimationFrame = function() {
+	return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		function(f) {
+			window.setTimeout(f, 1000 / 60)
+		}
+}()
+
+function timedChunk(items, newItems, process, context, delay, maxItems) {
+	var n = items.length,
+		delay = delay || 25,
+		maxItems = maxItems || n,
+		i = 0
+	
+	setTimeout(function chunkTimer(){
+		var start = +new Date(),
+			j = i
+		
+		while (i < n && (i - j) < maxItems && (new Date() - start < 50)) {
+			process.call(context, items[i], newItems[i])
+			i += 1
+		}
+		
+		if (i < n) {
+			setTimeout(chunkTimer, delay)
+		}
+	}, 25)
+}
+
+function updateVertices(vert, newVert) {
+	vert.z = newVert
+}
+
 // audio
 var audioCtx = new (window.AudioContext || window.webKitAudioContext)()
 var analyser = audioCtx.createAnalyser()
@@ -254,54 +290,58 @@ $(document).ready(function() {
 	var worker = new Worker('js/worker.js')
 	worker.addEventListener('message', function(e) {
 		count += 1
-
-		var vertices = e.data
-		for(var i = 0; i < terrain.geometry.vertices.length; i++) {
-			terrain.geometry.vertices[i].z = e.data[i]
-		}
+		
+		timedChunk(terrain.geometry.vertices, e.data, updateVertices)
 		
 		terrain.geometry.verticesNeedUpdate = true
-		
 		if (count >= SIZE_Y) {
 			terrain.geometry.computeVertexNormals()
-			terrain.geometry.computeFaceNormals()
 		}
 		
 		terrain.position.y = 0
 	}, false)
-
+	
 	// render loop
+	var now
+	var then = Date.now()
+	var interval = 1000 / 60;
+	var delta
 	var frame = 0
-    function render() {	
-		frame += 1
+    function render() {
+		requestAnimationFrame(render)
 		
-		for (var i = 0; i < clouds.length; i++) {
-			clouds[i].position.y -= SPEED
+		// lock frame rate
+		now = Date.now()
+		delta = now - then 
+		if (delta > interval) {
+			then = now - (delta % interval)
+			frame += 1
 			
-			if (clouds[i].position.y <= camera.position.y) {
-				resetCloud(clouds[i])
+			for (var i = 0; i < clouds.length; i++) {
+				clouds[i].position.y -= SPEED
+				
+				if (clouds[i].position.y <= camera.position.y) {
+					resetCloud(clouds[i])
+				}
 			}
+			
+			flare.lensFlares[0].opacity = 0.45 + 0.15 * (Math.sin(frame / (4 * 60)) + 1)
+
+			terrain.position.y -= SPEED
+			
+			water.material.uniforms.time.value += 1 / 600
+			waterNormals.offset.y -= SPEED
+			water.render()
+
+			if (frame % Math.floor(((1 / SPEED) * (SIZE_Y))) == 0) {
+				analyser.getByteFrequencyData(dataArray)
+
+				worker.postMessage(dataArray)
+			}
+			
+			renderer.render(scene, camera)
 		}
-		
-		flare.lensFlares[0].opacity = 0.45 + 0.15 * (Math.sin(frame / (4 * 60)) + 1)
-
-		terrain.position.y -= SPEED
-		
-		water.material.uniforms.time.value += 1 / 600
-		waterNormals.offset.y -= SPEED
-		water.render()
-
-		if (frame % Math.floor(((1 / SPEED) * (SIZE_Y))) == 0) {
-			analyser.getByteFrequencyData(dataArray)
-
-			worker.postMessage(dataArray)
-		}
-		
-        renderer.render(scene, camera)
     }
-
-    render()
-	setInterval(function() {
-        render()
-    }, 1000 / 144);
+	
+	render()
 })

@@ -144,8 +144,8 @@ THREE.Water = function ( renderer, camera, scene, options ) {
 
 			'vec4 getNoise( vec2 uv ) {',
 			
-			'	 vec2 uv0 = uv / (103.0 * noiseScale) + vec2(time / 12.0, time / 2.0);',
-			'    vec2 uv1 = uv / (107.0 * noiseScale) - vec2(time / -16.0, time / -4.0);',
+			'	 vec2 uv0 = uv / (103.0 * noiseScale) + vec2(time / 6.0, time / 1.0);',
+			'    vec2 uv1 = uv / (107.0 * noiseScale) - vec2(time / -8.0, time / -2.0);',
 			'    vec2 uv2 = uv / (vec2(8907.0, 9803.0) * noiseScale) + vec2(time / 101.0, time /   97.0);',
 			'    vec2 uv3 = uv / (vec2(1091.0, 1027.0) * noiseScale) - vec2(time / 109.0, time / -113.0);',
 			

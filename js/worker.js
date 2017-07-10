@@ -69,16 +69,6 @@ self.addEventListener('message', function(e) {
 			value *= (Math.floor(SECTION_COUNT / (SIZE_X * QUALITY + 1)) - row) / (Math.floor(SECTION_COUNT / (SIZE_X * QUALITY + 1)) - 1)
 		}
 		
-		// give curve
-		var offsetColumn = i % (SIZE_X * 1 + 1) + 1
-		var offset = ((1 - easeInQuad(offsetColumn / (SIZE_X + 1)))) * 16
-		if (offsetColumn < (SIZE_X) / 2 + 1) {
-			offset = ((1 - easeInQuad(((SIZE_X + 1) - offsetColumn) / (SIZE_X + 1)))) * 16
-		}
-		offset /= ((OCEAN_SIZE / SIZE_X) ** 2)
-		
-		value += offset
-		
 		vertices.push(value)
 
 		if (row == 1) {
