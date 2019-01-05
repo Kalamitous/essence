@@ -176,19 +176,19 @@ $(document).ready(function() {
 		forest.magFilter = THREE.Linear;
 		forest.minFilter = THREE.Linear;
 		forest.wrapS = forest.wrapT = THREE.RepeatWrapping;
-		forest.repeat.set(16, 16)
+		forest.repeat.set(32, 32)
 		
 		rock = loader.load('images/rock.png')
 		rock.magFilter = THREE.Linear;
 		rock.minFilter = THREE.Linear;
 		rock.wrapS = rock.wrapT = THREE.RepeatWrapping;
-		rock.repeat.set(16, 16)
+		rock.repeat.set(32, 32)
 		
 		snow = loader.load('images/snow.png')
 		snow.magFilter = THREE.Linear;
 		snow.minFilter = THREE.Linear;
 		snow.wrapS = snow.wrapT = THREE.RepeatWrapping;
-		snow.repeat.set(16, 16)
+		snow.repeat.set(32, 32)
 		
 		var material = generateBlendedMaterial([
 			{texture: sand},
@@ -318,7 +318,7 @@ $(document).ready(function() {
 			frame += 1
 			
 			for (var i = 0; i < clouds.length; i++) {
-				clouds[i].position.y -= SPEED
+				clouds[i].position.y -= SPEED / 1.5
 				
 				if (clouds[i].position.y <= camera.position.y) {
 					resetCloud(clouds[i])
@@ -329,7 +329,7 @@ $(document).ready(function() {
 
 			terrain.position.y -= SPEED
 			
-			water.material.uniforms.time.value += 1 / 600
+			water.material.uniforms.time.value += (1 / 600) * (SPEED / 0.1)
 			waterNormals.offset.y -= SPEED
 			water.render()
 

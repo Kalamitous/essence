@@ -26,7 +26,7 @@ self.addEventListener('message', function(e) {
 
 	var avgEnergy = energySum / dataArray.length
 			
-	var newHeight = avgEnergy / 20
+	var newHeight = avgEnergy / 16
 	if (newHeight > 8 - VARIANCE / 3) {
 		newHeight = 8 - VARIANCE / 3
 	}
