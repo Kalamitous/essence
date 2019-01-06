@@ -1,7 +1,7 @@
 // constants
 var SIZE_X = 64
 var SIZE_Y = 4
-var QUALITY = 2
+var QUALITY = 1
 var TILE_SIZE = 1 / QUALITY
 var SECTION_COUNT = (SIZE_X * QUALITY + 1) * (SIZE_Y * QUALITY + 1)
 var TOTAL_COUNT = (SIZE_X * QUALITY + 1) * (SIZE_X * QUALITY + 1)
